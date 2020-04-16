@@ -10,7 +10,7 @@ script:
 
 after_success:
   - docker build -t razaamir/multi-client ./client
-  - docker build -t razaamir/multi-nginx ./ngnix
+  - docker build -t razaamir/multi-nginx ./nginx
   - docker build -t razaamir/multi-server ./server
   - docker build -t razaamir/multi-worker ./worker
 
