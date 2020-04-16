@@ -19,7 +19,7 @@ after_success:
 
   # take those images and push them to docker hub
   - docker push razaamir/multi-client
-  - docker push razaamir/multi-ngnix
+  - docker push razaamir/multi-nginx
   - docker push razaamir/multi-server
   - docker push razaamir/multi-worker
 
