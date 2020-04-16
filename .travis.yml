@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t razaamir/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run razaamir/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t razaamir/multi-client ./client
+  - docker build -t razaamir/multi-nginx ./nginx
+  - docker build -t razaamir/multi-server ./server
+  - docker build -t razaamir/multi-worker ./worker
+
+  # log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+
+  # take those images and push them to docker hub
+  - docker push razaamir/multi-client
+  - docker push razaamir/multi-nginx
+  - docker push razaamir/multi-server
+  - docker push razaamir/multi-worker
+
